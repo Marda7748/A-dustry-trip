@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Dusty Trip - Survival Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="mainMenu" class="menu active">
+        <div class="menuContent">
+            <h1>🏜️ A DUSTY TRIP 🏜️</h1>
+            <p>Survive the desert. Manage your vehicle. Battle mutants.</p>
+            <button onclick="startGame()">START GAME</button>
+            <button onclick="toggleMenu('settingsMenu')">SETTINGS</button>
+            <button onclick="toggleMenu('multiplayerMenu')">MULTIPLAYER</button>
+        </div>
+    </div>
+
+    <div id="settingsMenu" class="menu">
+        <div class="menuContent">
+            <h2>SETTINGS</h2>
+            <label>
+                <input type="checkbox" id="soundToggle" checked> Sound Effects
+            </label>
+            <label>
+                <input type="checkbox" id="musicToggle" checked> Background Music
+            </label>
+            <label>
+                Master Volume: <input type="range" id="volumeSlider" min="0" max="100" value="50">
+            </label>
+            <label>
+                Difficulty:
+                <select id="difficultySelect">
+                    <option value="easy">Easy</option>
+                    <option value="normal" selected>Normal</option>
+                    <option value="hard">Hard</option>
+                    <option value="impossible">Impossible</option>
+                </select>
+            </label>
+            <button onclick="toggleMenu('settingsMenu')">BACK</button>
+        </div>
+    </div>
+
+    <div id="multiplayerMenu" class="menu">
+        <div class="menuContent">
+            <h2>MULTIPLAYER</h2>
+            <input type="text" id="playerName" placeholder="Enter your name" maxlength="20">
+            <input type="text" id="lobbyCode" placeholder="Enter lobby code to join">
+            <button onclick="createLobby()">CREATE LOBBY</button>
+            <button onclick="joinLobby()">JOIN LOBBY</button>
+            <div id="lobbyInfo"></div>
+            <button onclick="toggleMenu('multiplayerMenu')">BACK</button>
+        </div>
+    </div>
+
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+        <div id="hud">
+            <div id="playerStats">
+                <div class="stat"><span>Health:</span> <div class="bar"><div id="healthBar"></div></div> <span id="healthText">100</span></div>
+                <div class="stat"><span>Hunger:</span> <div class="bar"><div id="hungerBar"></div></div> <span id="hungerText">100</span></div>
+                <div class="stat"><span>Thirst:</span> <div class="bar"><div id="thirstBar"></div></div> <span id="thirstText">100</span></div>
+            </div>
+            <div id="vehicleStats">
+                <div class="stat"><span>Fuel:</span> <div class="bar"><div id="fuelBar"></div></div> <span id="fuelText">100L</span></div>
+                <div class="stat"><span>Engine Temp:</span> <div class="bar"><div id="tempBar"></div></div> <span id="tempText">50°C</span></div>
+                <div class="stat"><span>Engine Health:</span> <div class="bar"><div id="engineBar"></div></div> <span id="engineText">100%</span></div>
+                <div class="stat"><span>Fuel Purity:</span> <div class="bar"><div id="purityBar"></div></div> <span id="purityText">100%</span></div>
+            </div>
+            <div id="location">Location: Desert</div>
+            <div id="distance">Distance: 0m</div>
+            <div id="fps">FPS: 60</div>
+        </div>
+        <div id="notifications"></div>
+    </div>
+
+    <div id="pauseMenu" class="menu">
+        <div class="menuContent">
+            <h2>PAUSED</h2>
+            <button onclick="resumeGame()">RESUME</button>
+            <button onclick="openInventory()">INVENTORY</button>
+            <button onclick="goToMainMenu()">MAIN MENU</button>
+        </div>
+    </div>
+
+    <div id="inventoryUI" class="menu">
+        <div class="menuContent inventory">
+            <h2>INVENTORY</h2>
+            <div id="inventoryItems"></div>
+            <button onclick="closeInventory()">CLOSE</button>
+        </div>
+    </div>
+
+    <script src="networking.js"></script>
+    <script src="physics.js"></script>
+    <script src="game.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
